@@ -1,70 +1,96 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Boston House Price Prediction using Linear Regression
 
-## Available Scripts
+This project uses a machine learning model built with linear regression to predict house prices based on the Boston housing dataset. The model is trained on the dataset, serialized into a pickle file, and served via a Flask backend. The frontend is built using React, where users can input data to receive house price predictions.
 
-In the project directory, you can run:
+## Tech Stack
 
-### `npm start`
+- **Machine Learning**: 
+  - Python
+  - Scikit-Learn (for linear regression model)
+  - Pickle (for saving the model)
+- **Backend**: 
+  - Flask (Python web framework)
+  - Gunicorn (WSGI server for deploying the Flask app)
+- **Frontend**: 
+  - React (for the user interface)
+- **Deployment**: 
+  - Flask app deployed on Render
+  - Frontend hosted on Vercel
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Installation
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Backend Setup
 
-### `npm test`
+1. **Clone the backend repository**:
+   ```bash
+   git clone https://github.com/TanmayMachkar/ML-1.git
+   cd ML-1
+   ```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. **Install dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-### `npm run build`
+3. **Run the Flask server**:
+   After the model is trained, start the Flask backend server:
+   ```bash
+   python app.py
+   ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+   The backend will be running at `http://127.0.0.1:5000/`.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Frontend Setup
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. **Clone the frontend repository**:
+   ```bash
+   git clone https://github.com/TanmayMachkar/BostonHousePricesFrontend.git
+   cd BostonHousePricesFrontend
+   ```
 
-### `npm run eject`
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+3. **Start the React app**:
+   ```bash
+   npm start
+   ```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+   The frontend will be running at `http://localhost:3000`.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 4. Deploying on Render
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- Deploy the Flask backend to Render using the `render.yaml` configuration file.
+- The React frontend is deployed to Vercel.
 
-## Learn More
+## How it Works
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. The **React frontend** takes user inputs such as crime rate, average number of rooms, etc., from the Boston housing dataset.
+2. The data is sent to the **Flask API**, which loads 2 pre-trained linear regression model (`regmodel.pkl`) and (`scaling.pkl`) and makes predictions.
+3. The **Flask API** sends the predicted price back to the React frontend for display.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Example Usage
 
-### Code Splitting
+After the app is running, visit the frontend at `http://localhost:3000`. Enter the necessary input values and click on the "Predict" button to see the predicted house price.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Files
 
-### Analyzing the Bundle Size
+### Backend Repository
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- `app.py`: Flask app that serves the model and handles predictions.
+- `requirements.txt`: Python dependencies for the Flask app.
 
-### Making a Progressive Web App
+### Frontend Repository
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- `src/`: Directory containing the React frontend code.
 
-### Advanced Configuration
+## Contributing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Feel free to fork the repositories and make improvements. If you want to contribute, please open an issue or submit a pull request.
 
-### Deployment
+## License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is licensed under the MIT License.
