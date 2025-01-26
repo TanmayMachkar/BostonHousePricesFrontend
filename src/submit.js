@@ -26,14 +26,23 @@ const BostonHousePricePrediction = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form Data:', formData);  // Debugging the data being sent
+
+    // Ensure values are parsed as integers
+    const parsedFormData = Object.keys(formData).reduce((acc, key) => {
+      const value = formData[key];
+      acc[key] = value !== '' ? parseInt(value, 10) : ''; // Only parse if not empty
+      return acc;
+    }, {});
+
+    console.log('Parsed Form Data:', parsedFormData); // Debugging the data being sent
+    
     try {
       const response = await fetch('https://ml-1-un9e.onrender.com/predict', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ data: formData }),
+        body: JSON.stringify({ data: parsedFormData }),
       });
       const data = await response.json();
       console.log('Prediction Response:', data);  // Debugging the response
