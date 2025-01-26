@@ -26,6 +26,7 @@ const BostonHousePricePrediction = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log('Form Data:', formData);  // Debugging the data being sent
     try {
       const response = await fetch('https://ml-1-un9e.onrender.com/predict', {
         method: 'POST',
@@ -35,13 +36,13 @@ const BostonHousePricePrediction = () => {
         body: JSON.stringify({ data: formData }),
       });
       const data = await response.json();
+      console.log('Prediction Response:', data);  // Debugging the response
       setPrediction(data.prediction || 'No prediction received');
     } catch (error) {
       console.error('Error during prediction:', error);
       setPrediction('An error occurred.');
     }
   };
-
 
   return (
     <div
