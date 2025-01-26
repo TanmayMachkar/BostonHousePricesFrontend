@@ -2,19 +2,19 @@ import React, { useState } from 'react';
 
 const BostonHousePricePrediction = () => {
   const [formData, setFormData] = useState({
-    CRIM: '',
-    ZN: '',
-    INDUS: '',
-    CHAS: '',
-    NOX: '',
-    RM: '',
-    Age: '',
-    DIS: '',
-    RAD: '',
-    TAX: '',
-    PTRATIO: '',
-    B: '',
-    LSTAT: '',
+    crim: '',
+    zn: '',
+    indus: '',
+    chas: '',
+    nox: '',
+    rm: '',
+    age: '',
+    dis: '',
+    rad: '',
+    tax: '',
+    ptratio: '',
+    b: '',
+    lstat: '',
   });
 
   const [prediction, setPrediction] = useState('');
@@ -27,25 +27,26 @@ const BostonHousePricePrediction = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Ensure values are parsed as integers
     const parsedFormData = Object.keys(formData).reduce((acc, key) => {
       const value = formData[key];
-      acc[key] = value !== '' ? parseInt(value, 10) : ''; // Only parse if not empty
+      acc[key] = value !== '' ? parseFloat(value) : 0;
       return acc;
     }, {});
 
-    console.log('Parsed Form Data:', parsedFormData); // Debugging the data being sent
-    
+    const requestData = { data: parsedFormData };
+
+    console.log('Sending data:', requestData);
+
     try {
       const response = await fetch('https://ml-1-un9e.onrender.com/predict', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ data: parsedFormData }),
+        body: JSON.stringify(requestData),
       });
       const data = await response.json();
-      console.log('Prediction Response:', data);  // Debugging the response
+      console.log('Prediction Response:', data);
       setPrediction(data.prediction || 'No prediction received');
     } catch (error) {
       console.error('Error during prediction:', error);
@@ -86,7 +87,7 @@ const BostonHousePricePrediction = () => {
           {Object.keys(formData).map((key) => (
             <input
               key={key}
-              type="text"
+              type="number"
               name={key}
               placeholder={key}
               value={formData[key]}
