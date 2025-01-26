@@ -27,12 +27,12 @@ const BostonHousePricePrediction = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('https://your-backend-url.com/predict', { // Replace with your actual backend URL
+      const response = await fetch('https://ml-1-un9e.onrender.com/predict', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ data: formData }), // Ensure the backend receives `data` in the correct format
+        body: JSON.stringify({ data: formData }),
       });
       const data = await response.json();
       setPrediction(data.prediction || 'No prediction received');
