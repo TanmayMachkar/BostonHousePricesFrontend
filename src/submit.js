@@ -27,12 +27,12 @@ const BostonHousePricePrediction = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('/predict', {
+      const response = await fetch('https://your-backend-url.com/predict', { // Replace with your actual backend URL
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ data: formData }), // Ensure the backend receives `data` in the correct format
       });
       const data = await response.json();
       setPrediction(data.prediction || 'No prediction received');
@@ -41,6 +41,7 @@ const BostonHousePricePrediction = () => {
       setPrediction('An error occurred.');
     }
   };
+
 
   return (
     <div
