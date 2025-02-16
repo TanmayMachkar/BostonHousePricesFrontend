@@ -2,6 +2,8 @@
 # Boston House Price Prediction using Linear Regression
 
 This project uses a machine learning model built with linear regression to predict house prices based on the Boston housing dataset. The model is trained on the dataset, serialized into a pickle file, and served via a Flask backend. The frontend is built using React, where users can input data to receive house price predictions.
+- **Backend for this project**: https://github.com/TanmayMachkar/ML-1
+- **Find the live site here**: https://boston-house-prices-frontend.vercel.app/
 
 ## Tech Stack
 
